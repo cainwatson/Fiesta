@@ -40,16 +40,18 @@ export class SidebarPage {
 
   onQuery() {
     this.parties$.subscribe((parties) => {
-      this.parties = parties.filter(party => party.name.toLowerCase().includes(this.query.toLowerCase()));
+      this.parties = parties.filter(({ name }) => {
+        const query = this.query.toLowerCase();
+        name = name.toLowerCase();
+        return name.includes(query);
+      });
     });
   }
 
   reset() {
-    this.parties$
-      .take(1)
-      .subscribe((parties) => {
-        this.parties = parties;
-      });
+    this.parties$.take(1).subscribe((parties) => {
+      this.parties = parties;
+    });
   }
 
   goToParty(party) {

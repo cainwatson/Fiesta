@@ -45,7 +45,7 @@ export class UploadComponent {
       () => this.navParams.get('upload')(this.dataUri).then(() => this.viewCtrl.dismiss()),
       'Something Went Wrong When Uploading Your Image',
       {
-        loadingOptions: { content: 'uploading' },
+        loadingOptions: { content: 'Uploading' },
       },
     );
   }

@@ -75,7 +75,7 @@ export class PartyProvider {
   }
 
   inviteUser(partyId, phoneNumber) {
-    phoneNumber = `+1${phoneNumber.replace(/\D/g, '')}`
+    phoneNumber = `+1${phoneNumber.replace(/\D/g, '')}`;
     return app.service('parties').patch(partyId, { phoneNumber });
   }
 

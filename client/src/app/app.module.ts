@@ -38,7 +38,7 @@ import { reducers } from '../store/reducers';
     LoginPageModule,
     SignupPageModule,
     HomePageModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, { mode: 'ios' }),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument(),
   ],

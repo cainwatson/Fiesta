@@ -127,7 +127,7 @@ $red-violet: color($colors, red-violet);
   color: gold;
 }
 
-// OVERRIDE
+// OVERRIDES
 .toolbar-background, .tabbar {
   @extend .bg-gradient;
   animation: BackgroundGradient 12s ease-in-out infinite;
