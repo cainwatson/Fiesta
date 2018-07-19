@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
@@ -34,6 +34,7 @@ export class PartyPage implements OnInit, OnDestroy{
     public modalCtrl: ModalController,
     private store: Store<AppState>,
     private userProvider: UserProvider,
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     this.party = navParams.get('party')
     this.onNewMessage = this.onNewMessage.bind(this);
@@ -57,6 +58,7 @@ export class PartyPage implements OnInit, OnDestroy{
   }
 
   ngOnDestroy() {
+    this.changeDetectorRef.detach();
     app.service('group-messages').off('created', this.onNewMessage);
     app.service('game').off('created', this.onGameCreated);
     this.userSub.unsubscribe();
@@ -93,6 +95,9 @@ export class PartyPage implements OnInit, OnDestroy{
     this.partyProvider.getGroupMessageUser(newMessage).then((message) => {
       if (message.user_id != this.user.id) {
         this.messages.push(message);
+        try {
+          this.changeDetectorRef.detectChanges();
+        } catch (e) { console.log('UPDATE FAILED') }
       }
     });
   }
