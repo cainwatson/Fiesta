@@ -44,7 +44,7 @@ export class PartyProvider {
     return app.service('group-messages').find({
       query: {
         party_id,
-        $sort: {createdAt: -1},
+        $sort: {createdAt: 1},
         $limit: 15,
       },
     })
