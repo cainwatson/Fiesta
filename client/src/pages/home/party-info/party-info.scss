@@ -1,3 +1,16 @@
 page-party-info {
+  .info ion-list {
+    margin-bottom: 16px;
+  }
 
+  .story .media {
+    width: 120px;
+    height: 120px;
+    border: 1.5px solid transparent;
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
 }

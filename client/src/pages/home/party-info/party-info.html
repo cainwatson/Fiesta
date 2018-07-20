@@ -8,26 +8,37 @@
 </ion-header>
 
 <ion-content padding>
-  <h2>Party Info</h2>
-  <ion-list>
-    <ion-item>
-      <h4>Location</h4>
-      <p>{{party.location}}</p>
-    </ion-item>
-    <ion-item>
-      <h4>Start</h4>
-      <p>{{parseDate(party.start_date)}}</p>
-    </ion-item>
-    <ion-item>
-      <h4>End</h4>
-      <p>{{parseDate(party.end_date)}}</p>
-    </ion-item>
-  </ion-list>
-
-  <h2>Members</h2>
-  <ion-list>
-    <ion-item *ngFor="let user of users" class="user" no-padding>
-      <user-card [user]="user.user"></user-card>
-    </ion-item>
-  </ion-list>
+  <div class="info">
+    <h2>Party Info</h2>
+    <ion-list>
+      <ion-item>
+        <h4>Location</h4>
+        <p>{{party.location}}</p>
+      </ion-item>
+      <ion-item>
+        <h4>Start</h4>
+        <p>{{parseDate(party.start_date)}}</p>
+      </ion-item>
+      <ion-item>
+        <h4>End</h4>
+        <p>{{parseDate(party.end_date)}}</p>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="party.media.length !== 0" class="story" margin-bottom>
+    <h2>Story</h2>
+    <div class="d-flex">
+      <div *ngFor="let media of party.media | slice:0:3; index as i" class="media">
+        <img (click)="openMedia(i)" [src]="media.link" alt="media.caption" />
+      </div>
+    </div>
+  </div>
+  <div>
+    <h2>Members</h2>
+    <ion-list>
+      <ion-item *ngFor="let user of users" class="user" no-padding>
+        <user-card [user]="user.user"></user-card>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
