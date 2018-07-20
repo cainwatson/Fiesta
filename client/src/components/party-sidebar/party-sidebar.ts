@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 import { Party } from '../../interfaces/Party';
 import { CreateGameComponent } from '../create-game/create-game';
+import { InvitePage } from '../../pages/home/invite/invite';
 
 @Component({
   selector: 'party-sidebar',
@@ -16,6 +17,11 @@ export class PartySidebarComponent {
   goToCreateGame() {
     const { party } = this;
     this.modalCtrl.create(CreateGameComponent, { party }).present();
+  }
+
+  goToInvite() {
+    const { party } = this;
+    this.modalCtrl.create(InvitePage, { party }).present();
   }
 
 }
