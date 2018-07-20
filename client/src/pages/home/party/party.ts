@@ -73,10 +73,6 @@ export class PartyPage implements OnInit, OnDestroy{
     });
   }
 
-  exitChat() {
-    this.navCtrl.setRoot('PartyPage');
-  }
-
   onSend() {
     const { message, messages } = this;
     const newMessage = {

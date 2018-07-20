@@ -7,15 +7,10 @@
   </ion-navbar>
 </ion-header>
 
-<div *ngIf="isHost">
-  <ion-menu [content]="partyContent" type="overlay" side="right">
-    <ion-toolbar>
-    </ion-toolbar>
-    <ion-content>
-      <party-sidebar [party]="party"></party-sidebar>
-    </ion-content>
-  </ion-menu>
-</div>
+<ion-menu *ngIf="isHost" [content]="partyContent" type="overlay" side="right">
+  <ion-toolbar></ion-toolbar>
+  <party-sidebar [party]="party"></party-sidebar>
+</ion-menu>
 
 <ion-content padding #partyContent>
   <div ion-list class="list">
@@ -32,12 +27,14 @@
   </div>
 </ion-content>
 
-<ion-footer class="d-flex chat">
-  <ion-textarea [(ngModel)]="message" class="w-80" placeholder="Send Chat"></ion-textarea>
-  <button (click)="onSend()" class="w-auto" ion-button clear>
-    <ion-icon name="send"></ion-icon>
-  </button>
-  <button (click)="goToUpload()" class="w-auto" ion-button clear>
-    <ion-icon name="camera"></ion-icon>
-  </button>
+<ion-footer>
+  <div class="d-flex chat">
+    <ion-textarea [(ngModel)]="message" class="w-80" placeholder="Send Chat"></ion-textarea>
+    <button (click)="onSend()" class="w-auto" ion-button clear>
+      <ion-icon name="send"></ion-icon>
+    </button>
+    <button (click)="goToUpload()" class="w-auto" ion-button clear>
+      <ion-icon name="camera"></ion-icon>
+    </button>
+  </div>
 </ion-footer>

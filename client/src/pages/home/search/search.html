@@ -11,13 +11,13 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-segment [(ngModel)]="relationship" color="primary">
-        <ion-segment-button value="parties">
-          Parties
-        </ion-segment-button>
-        <ion-segment-button value="users">
-          Users
-        </ion-segment-button>
+    <ion-segment [(ngModel)]="relationship" margin-bottom>
+      <ion-segment-button value="parties">
+        Parties
+      </ion-segment-button>
+      <ion-segment-button value="users">
+        Users
+      </ion-segment-button>
     </ion-segment>
     <div [ngSwitch]="relationship">
       <ion-list *ngSwitchCase="'parties'">
@@ -52,7 +52,7 @@
         <p *ngIf="users.length === 0">Nothing showed up for "{{query}}"</p>
         <ion-item *ngFor="let user of users" class="user" name="user" no-padding>
             <user-card [user]="user"></user-card>
-        </ion-item>       
+        </ion-item>
       </ion-list>
-    </div>  
+    </div>
 </ion-content>

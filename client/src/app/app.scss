@@ -138,6 +138,20 @@ $red-violet: color($colors, red-violet);
 .bar-button * {
   font-weight: 600;
 }
+.bar-button ion-icon {
+  font-size: 2.3rem;
+}
+ion-navbar ion-buttons[left], ion-navbar ion-buttons[before] {
+  margin-left: 6px;
+}
+ion-navbar ion-buttons[right], ion-navbar ion-buttons[after] {
+  margin-right: 6px;
+}
+
+ion-badge {
+  @extend .col-gradient;
+}
+
 ion-content, .item {
   background-color: #fafafa !important;
   .card {
