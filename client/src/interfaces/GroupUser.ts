@@ -1,4 +1,5 @@
 import { User } from './User';
+import { Party } from './Party';
 
 export interface GroupUser {
   id: number
@@ -6,6 +7,7 @@ export interface GroupUser {
   updatedAt: string
   user_id: number
   party_id: number
-  user: User
+  party?: Party
+  user?: User
   is_host: boolean
 }
