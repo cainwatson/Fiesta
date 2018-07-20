@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, MenuController } from 'ionic-angular';
 import { Party } from '../../../interfaces/Party';
 import { AppState } from '../../../store/reducers';
 import { PartyProvider } from '../../../providers/party/party';
@@ -21,9 +21,11 @@ export class TimelinePage implements OnInit {
   friends: User[] = []
 
   constructor(
-    public partyProvider: PartyProvider, 
+    public menuCtrl: MenuController,
+    public userProvider: UserProvider,
+    public partyProvider: PartyProvider,
     private store: Store<AppState>,
-    public userProvider: UserProvider) { }
+  ) { }
 
   ngOnInit() {
     this.userSub = this.store.select('user').subscribe((user) => {
@@ -49,6 +51,11 @@ export class TimelinePage implements OnInit {
       })
     })
   }
+
+  toggleSidebar() {
+    this.menuCtrl.toggle();
+  }
+
 }
 
 
