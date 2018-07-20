@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Party } from '../../interfaces/Party';
+import { GroupUser } from '../../interfaces/GroupUser';
 import { Message } from '../../interfaces/Message';
 import { FeathersPayload } from '../../interfaces/FeathersRespose';
 import { app } from '../../feathers';
 
 type PartiesResponse = FeathersPayload<Party>;
+type GroupUsersResponse = FeathersPayload<GroupUser>;
 type MessagesResponse = FeathersPayload<Message>;
 
 @Injectable()
@@ -31,6 +33,10 @@ export class PartyProvider {
   getUserParties(user_id): Promise<Party[]> {
     return app.service('group-users').find({ query: { user_id } })
       .then(response => response.data.map(data => data.party));
+  }
+
+  getPartyUsers(party_id): Promise<GroupUsersResponse> {
+    return app.service('group-users').find({ query: { party_id } });
   }
 
   userInParties(user_id: string, parties: Party[]): Promise<boolean[]> {
