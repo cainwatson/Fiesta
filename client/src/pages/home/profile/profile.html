@@ -1,2 +1,2 @@
-<profile *ngIf="user" [user]="user" [isProfilePage]="true"></profile>
+<profile *ngIf="user" [user]="user" [isProfilePage]="true" (loaded)="receiveLoad($event)"></profile>
 <ion-content *ngIf="!user" padding>loading...</ion-content>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { App, NavParams, NavController, ViewController, ModalController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
 
   @Input('user') inUser: User
   @Input('isProfilePage') isProfilePage: boolean
+  @Output('loaded') loaded = new EventEmitter()
 
   user: User
   currentUser: User
@@ -45,10 +46,11 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.inUser || this.navParams.get('user');
-    this.ionViewWillLoad();
+    this.load();
+    this.loaded.emit(this.load.bind(this));
   }
 
-  ionViewWillLoad() {
+  load() {
     if (!this.user) {
       this.user = this.inUser || this.navParams.get('user');
     }

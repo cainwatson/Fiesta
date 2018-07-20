@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IonicPage } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
@@ -17,6 +17,7 @@ export class ProfilePage implements OnInit, OnDestroy {
 
   user: User
   userSub: Subscription
+  load
 
   constructor(
     public userProvider: UserProvider,
@@ -31,6 +32,14 @@ export class ProfilePage implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.userSub.unsubscribe();
+  }
+
+  receiveLoad(load) {
+    this.load = load;
+  }
+
+  ionViewWillEnter() {
+    if (this.load) this.load();
   }
 
 }

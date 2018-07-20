@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators/map';
 import { FriendRequest } from '../../../interfaces/FriendRequest';
 import { AppState } from '../../../store/reducers';
 import { AddToFriendRequests, AddFromFriendRequests } from '../../../store/friend-requests/friend-requests.actions';
+import { AddFriends } from '../../../store/friends/friends.actions';
 import { UserProvider } from '../../../providers/user/user';
 
 type FriendRequestHandler = {
@@ -51,6 +52,8 @@ export class FriendRequestsPage implements OnInit, OnDestroy {
         .then(friendRequestResponse => this.store.dispatch(new AddToFriendRequests(friendRequestResponse.data))),
       this.userProvider.getFromFriendRequests(this.userId)
         .then(friendRequestResponse => this.store.dispatch(new AddFromFriendRequests(friendRequestResponse.data))),
+      this.userProvider.getUserFriends(this.userId)
+        .then(friends => this.store.dispatch(new AddFriends(friends.data))),
     ]);
   }
 
