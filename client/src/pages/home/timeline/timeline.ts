@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IonicPage, MenuController } from 'ionic-angular';
 import { Party } from '../../../interfaces/Party';
@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs/Subscription';
   selector: 'page-timeline',
   templateUrl: 'timeline.html',
 })
-export class TimelinePage implements OnInit {
+export class TimelinePage implements OnInit, OnDestroy {
 
   user: User
   userSub: Subscription
@@ -31,26 +31,45 @@ export class TimelinePage implements OnInit {
     this.userSub = this.store.select('user').subscribe((user) => {
       this.user = user;
     });
-
-    this.userProvider.getUserFriends(this.user.id)
-    .then((friends) => {
-      const friendsPartiesMap = {};
-      this.friends = friends.data
-      this.friends.forEach(friend => {
-        this.userProvider.getUserParties(friend.id).then((parties) => {
-          const friendParties = parties.data.map(groupUser => groupUser.party)
-          .reduce((friendsParties, party) => {
-            if (!(party.id in friendsPartiesMap)) {
-              friendsParties.unshift(party);
-            }
-            friendsPartiesMap[party.id] = true;
-            return friendsParties
-          }, []);
-          this.parties.unshift(...friendParties);
-      });
-      })
-    })
   }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
+  }
+
+  async ionViewWillEnter() {
+    const friends = await this.userProvider.getUserFriends(this.user.id);
+    this.friends = friends.data;
+
+    const friendsParties = [];
+    const friendsPartiesMap = {};
+    await Promise.all(this.friends.map(async (friend) => {
+      const parties = await this.userProvider.getUserParties(friend.id);
+      const uniqueParties = parties.data
+        .map(groupUser => groupUser.party)
+        .filter((party) => {
+          let isUnique = false;
+
+          if (!(party.id in friendsPartiesMap)) {
+            isUnique = true;
+            friendsPartiesMap[party.id] = true;
+          }
+
+          return isUnique;
+        });
+
+      friendsParties.push(...uniqueParties);
+    }));
+
+    this.parties = friendsParties.sort((a, b) => {
+      const aUpdatedAt = new Date(a.updatedAt);
+      const bUpdatedAt = new Date(b.updatedAt);
+
+      if (aUpdatedAt === bUpdatedAt) return 0;
+      return aUpdatedAt > bUpdatedAt ? -1 : 1;
+    });
+  }
+
 
   toggleSidebar() {
     this.menuCtrl.toggle();
