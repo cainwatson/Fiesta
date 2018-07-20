@@ -8,10 +8,11 @@ module.exports = (options = {}) => async context => {
   const phoneNumber = context.data.phoneNumber;
 
   if (phoneNumber) {
+    const { name } = await context.app.service('parties').get(context.id);
     await twilio.messages.create({
       to: phoneNumber,
       from: twilio_number,
-      body: 'You have been invited to a party on ¡Fiesta!',
+      body: `You have been invited to "${name}" on ¡Fiesta!`,
     });
   }
 
