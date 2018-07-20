@@ -1,7 +1,48 @@
 create-game {
+  @keyframes tada {
+    0% {
+      -webkit-transform: scaleX(1);
+      transform:scaleX(1)
+    }
+    10%, 20% {
+      -webkit-transform: scale3d(.9,.9,.9) rotate(-3deg);
+      transform: scale3d(.9,.9,.9) rotate(-3deg);
+    }
+    30%, 50%, 70%, 90% {
+      -webkit-transform: scale3d(1.2,1.2,1.2) rotate(3deg);
+      transform: scale3d(1.2,1.2,1.2) rotate(3deg);
+    }
+    40%, 60%, 80% {
+      -webkit-transform: scale3d(1.2,1.2,1.2) rotate(-3deg);
+      transform: scale3d(1.2,1.2,1.2) rotate(-3deg);
+    }
+    to {
+      -webkit-transform: scaleX(1);
+      transform: scaleX(1)
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      -webkit-transform: scaleX(1);
+      transform:scaleX(1);
+    }
+    50%{
+      webkit-transform: scale3d(1.6,1.6,1.6);
+      transform: scale3d(1.6,1.6,1.6);
+    }
+    to{
+      -webkit-transform: scaleX(1);
+      transform:scaleX(1);
+    }
+  }
+
   .game {
     .icon {
       font-size: 5rem;
+      span {
+        display: block;
+      }
     }
     .title {
       font-size: 5.8rem;
@@ -22,6 +63,9 @@ create-game {
     .title, .desc, .create {
       color: #68A9FF;
     }
+    .icon .animated {
+      animation-duration: 2s;
+    }
     .title {
       font-size: 7.5rem;
       font-family: 'Luckiest Guy', cursive;
@@ -37,6 +81,10 @@ create-game {
   .hot {
     .title, .desc, .create {
       color: #DF551B;
+    }
+    .icon .animated {
+      animation-duration: 1.4s;
+      animation-iteration-count: 2;
     }
     .title {
       font-size: 5.5rem;

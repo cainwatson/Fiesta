@@ -7,12 +7,12 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="d-flex">
-    <button (click)="takePhoto()" color="primary" class="w-50" ion-button large>Take Photo</button>
-    <button (click)="getPhoto()" color="orange" class="w-50" ion-button large>Get Image</button>
-  </div>
-  <div *ngIf="dataUri">
-    <img [src]="dataUri" width="300" />
-    <button (click)="upload()" ion-button large>Upload</button>
+  <div class="content">
+    <div class="d-flex">
+      <button (click)="takePhoto()" color="primary" class="w-50" ion-button large>Take Photo</button>
+      <button (click)="getPhoto()" color="orange" class="w-50" ion-button large>Get Image</button>
+    </div>
+    <img *ngIf="dataUri" [src]="dataUri" width="100%" />
+    <button *ngIf="dataUri" (click)="upload()" ion-button large full>Upload</button>
   </div>
 </ion-content>

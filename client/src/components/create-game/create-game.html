@@ -11,12 +11,10 @@
   <ion-slides pager="true" loop="true">
     <ion-slide *ngFor="let game of games" [ngClass]="game.name" class="game">
       <div [ngSwitch]="game.name" class="icon">
-        <span *ngSwitchCase="'match'">🔎</span>
-        <span *ngSwitchCase="'hot'">🔥</span>
+        <span *ngSwitchCase="'match'" class="animated tada" #matchAnimated>🔍</span>
+        <span *ngSwitchCase="'hot'" class="animated pulse" #hotAnimated>🔥</span>
       </div>
-      <h1 class="title">
-        {{game.title}}
-      </h1>
+      <h1 class="title">{{game.title}}</h1>
       <p class="desc">{{game.description}}</p>
       <button (click)="create(game.name)" class="create" ion-button outline large>Create</button>
     </ion-slide>

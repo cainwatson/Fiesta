@@ -38,12 +38,12 @@
       <ion-datetime id="end-time" displayFormat="h:mm a" [(ngModel)]="endTime">
       </ion-datetime>
     </div>
-    <h4>Party Preference</h4>
+    <h4>Party Preferences</h4>
     <div ion-item>
       <ion-label>Private</ion-label>
       <ion-checkbox [(ngModel)]="isPrivate"></ion-checkbox>
     </div>
-    <div class="submit">
+    <div class="submit" margin-top>
       <button (click)="onSubmit()" ion-button full>Party On!</button>
     </div>
   </div>
