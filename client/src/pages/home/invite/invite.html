@@ -1,14 +1,30 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Invite</ion-title>
+    <ion-searchbar
+      [(ngModel)]="searchQuery"
+      (ionInput)="searchFriends()"
+      (ionCancel)="searchReset()"
+      (ionClear)="searchReset()"
+    ></ion-searchbar>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <div>
-    <ion-input [(ngModel)]="phoneNumber" placeholder="Phone number"></ion-input>
-    <button (click)="getContact()" ion-button>Pick From Contacts</button>
-    <button (click)="addNumber()" ion-button>Add Number</button>
+<ion-content>
+  <div class="header" padding>
+    <h1>Invite Friends</h1>
+    <p>Swipe left on a friend to invite them</p>
   </div>
-  <button (click)="onDone()" ion-button full>Done</button>
+  <ion-list class="friends">
+    <ion-item-sliding *ngFor="let friend of friends">
+      <ion-item>
+        <user-card [user]="friend"></user-card>
+      </ion-item>
+      <ion-item-options (ionSwipe)="inviteFriend(friend)" side="right">
+        <button (click)="inviteFriend(friend)" ion-button expandable>Invite</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <div padding>
+    <button (click)="onDone()" ion-button full>Done</button>
+  </div>
 </ion-content>
