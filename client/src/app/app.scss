@@ -152,11 +152,8 @@ ion-badge {
   @extend .col-gradient;
 }
 
-ion-content, .item {
-  background-color: #fafafa !important;
-  .card {
-    background-color: #fefefe !important;
-  }
+ion-content, .item, .card {
+  background-color: #fefefe !important;
 }
 
 // FIX

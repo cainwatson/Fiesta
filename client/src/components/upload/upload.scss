@@ -1,12 +1,6 @@
 upload {
-  .content {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    img {
-      object-fit: cover;
-      max-height: 66vh;
-    }
+  img {
+    object-fit: cover;
+    max-height: 66vh;
   }
 }
