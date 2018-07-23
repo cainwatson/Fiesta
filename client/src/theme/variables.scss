@@ -43,7 +43,15 @@ $colors: (
   orange:      #F45F00,
   blue:        cornflowerblue,
   blue-violet: blueviolet,
-  red-violet:  mediumvioletred
+  red-violet:  mediumvioletred,
+  game-match: (
+    base: #68A9FF,
+    contrast: #f8f8f8
+  ),
+  game-hot: (
+    base: #DF551B,
+    contrast: #f8f8f8
+  )
 );
 
 
