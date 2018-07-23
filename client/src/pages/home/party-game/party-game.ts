@@ -2,15 +2,16 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IonicPage, NavController, ViewController, NavParams, ModalController, ToastController } from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device-motion';
 import { Subscription } from 'rxjs/Subscription';
 import { throttle } from 'throttle-debounce';
 import { Party } from '../../../interfaces/Party';
 import { User } from '../../../interfaces/User';
+import { Game } from '../../../interfaces/Game';
 import { AppState } from '../../../store/reducers';
 import { UploadComponent } from '../../../components/upload/upload';
-import { app } from '../../../feathers';
-import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device-motion';
 import { UserProvider } from '../../../providers/user/user';
+import { app } from '../../../feathers';
 
 @IonicPage()
 @Component({
@@ -21,7 +22,8 @@ export class PartyGamePage implements OnInit, OnDestroy {
 
   party: Party
   user: User
-  game: any
+  game: Game
+  title: string
   userSub: Subscription
   motionSub: Subscription
   state: 'lobby' | 'starting' | 'started' | 'ended'
@@ -50,6 +52,7 @@ export class PartyGamePage implements OnInit, OnDestroy {
   ngOnInit() {
     this.party = this.navParams.get('party');
     this.game = this.navParams.get('game');
+    this.title = this.getTitle(this.game);
     this.state = this.game.state;
 
     this.userSub = this.store.select('user').subscribe((user) => {
@@ -57,7 +60,7 @@ export class PartyGamePage implements OnInit, OnDestroy {
       if (this.game.match_it_id && this.game.match_it_id == this.user.id) {
         this.chosen = true;
       }
-      
+
       this.userProvider.getHostOfParty(this.party.id, this.user.id)
       .then(response => this.isHost = response.total > 0);
     });
@@ -88,7 +91,16 @@ export class PartyGamePage implements OnInit, OnDestroy {
     this.changeDetectorRef.detach();
   }
 
+  getTitle(game) {
+    if (game.name === 'match') {
+      return 'Match!';
+    } else if (game.name === 'hot') {
+      return 'HotTot!';
+    }
+  }
+
   onGameUpdate(data) {
+    console.log(JSON.stringify(data));
     this.state = this.state === 'ended' ? 'ended' : data.state;
     if (data.name === 'match') {
       if (data.state === 'starting') {
@@ -101,19 +113,22 @@ export class PartyGamePage implements OnInit, OnDestroy {
     } else if (data.name === 'hot') {
       if (data.state === 'ended') {
         this.stopMotion();
-        this.userProvider.findUser({ id: data.hot_it_id })
-          .then((user) => {
-            this.hotLoser = user.nickname;
-          });
+        this.userProvider.findUser({ id: data.hot_it_id }).then((user) => {
+          this.hotLoser = user.nickname;
+          this.detectChanges();
+        });
       }
       if (data.hot_it) {
         this.chosen = data.hot_it.user_id == this.user.id;
       }
     }
+    this.detectChanges();
+  }
 
+  detectChanges() {
     try {
       this.changeDetectorRef.detectChanges();
-    } catch (e) { console.log('UPDATE FAILED') }
+    } catch (e) { }
   }
 
   stopMotion() {

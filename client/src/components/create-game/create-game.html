@@ -16,7 +16,7 @@
       </div>
       <h1 class="title">{{game.title}}</h1>
       <p class="desc">{{game.description}}</p>
-      <button (click)="create(game.name)" class="create" ion-button outline large>Create</button>
+      <button (click)="create(game.name)" class="create" [color]="'game-' + game.name" ion-button outline large>Create</button>
     </ion-slide>
   </ion-slides>
 </ion-content>

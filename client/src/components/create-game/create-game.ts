@@ -63,8 +63,8 @@ export class CreateGameComponent implements OnInit, OnDestroy {
         const { party, partyProvider } = this;
         const party_id = party.id;
 
-        const game = await partyProvider.createGame({ name, party_id });
-        this.navCtrl.push('PartyGamePage', { party, game });
+        await partyProvider.createGame({ name, party_id });
+        await new Promise(resolve => setTimeout(() => resolve(this.viewCtrl.dismiss()), 500));
       },
       'Oops! Something went wrong when creating your game.',
     );

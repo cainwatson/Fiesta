@@ -1,3 +1,52 @@
-page-party-game {
+$match: color($colors, game-match);
+$hot: color($colors, game-hot);
 
+page-party-game {
+  .game {
+    &__title {
+      font-size: 5rem;
+      padding-top: 30px;
+    }
+    &__text {
+      font-family: 'Lato', sans-serif;
+    }
+    button {
+      min-width: 150px;
+    }
+  }
+  p.game__text {
+    font-size: 2rem;
+    font-style: italic;
+    margin: 0;
+  }
+
+  // GAME SPECIFIC STYLES
+  .match {
+    .game__title, .game__text {
+      color: $match;
+    }
+    .game__title {
+      font-size: 7.5rem;
+      font-family: 'Luckiest Guy', cursive;
+    }
+    .qrcode {
+      margin: 0 80px;
+      img {
+        width: 100% !important;
+      }
+    }
+  }
+
+  .hot {
+    .game__title, .game__text {
+      color: $hot;
+    }
+    .game__title {
+      font-size: 5.2rem;
+      font-family: 'Blazed';
+    }
+    .hot-tot {
+      width: 75%;
+    }
+  }
 }

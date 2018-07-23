@@ -1,3 +1,6 @@
+$match: color($colors, game-match);
+$hot: color($colors, game-hot);
+
 create-game {
   @keyframes tada {
     0% {
@@ -27,11 +30,11 @@ create-game {
       -webkit-transform: scaleX(1);
       transform:scaleX(1);
     }
-    50%{
+    50% {
       webkit-transform: scale3d(1.6,1.6,1.6);
       transform: scale3d(1.6,1.6,1.6);
     }
-    to{
+    to {
       -webkit-transform: scaleX(1);
       transform:scaleX(1);
     }
@@ -57,11 +60,14 @@ create-game {
       width: 50%;
       margin-top: 100px;
     }
+    .create:hover, .create:focus, .create:active {
+      color: #f8f8f8;
+    }
   }
 
   .match {
     .title, .desc, .create {
-      color: #68A9FF;
+      color: $match;
     }
     .icon .animated {
       animation-duration: 2s;
@@ -70,17 +76,14 @@ create-game {
       font-size: 7.5rem;
       font-family: 'Luckiest Guy', cursive;
     }
-    .create {
-      border-color: #68A9FF;
-    }
     .create:hover, .create:focus, .create:active {
       color: #f8f8f8;
-      background: #68A9FF;
+      background: $match;
     }
   }
   .hot {
     .title, .desc, .create {
-      color: #DF551B;
+      color: $hot;
     }
     .icon .animated {
       animation-duration: 1.4s;
@@ -88,14 +91,11 @@ create-game {
     }
     .title {
       font-size: 5.5rem;
-      font-family: 'Blazed' !important;
-    }
-    .create {
-      border-color: #DF551B;
+      font-family: 'Blazed';
     }
     .create:hover, .create:focus, .create:active {
       color: #f8f8f8;
-      background: #DF551B;
+      background: $hot;
     }
   }
 
