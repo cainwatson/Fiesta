@@ -23,11 +23,11 @@ module.exports = {
       async context => {
         const getRandomUser = async (party_id, notId) => {
           let randomUser;
-          do {
+          // do {
             const userResponse = await context.app.service('group-users').find({ query: { party_id } });
             const random = Math.floor(Math.random() * userResponse.total);
             randomUser = userResponse.data[random];
-          } while (randomUser.id == notId);
+          // } while (randomUser.id == notId);
           return randomUser;
         };
 
@@ -45,6 +45,8 @@ module.exports = {
         } else if (name === 'hot') {
           if (state === 'starting' || action === 'pass') {
             const randomUser = await getRandomUser(party_id, hot_it_id);
+
+            // console.log('ranUser', randomUser);
 
             context.result.hot_it = randomUser;
             context.result.hot_it_id = randomUser.user_id;

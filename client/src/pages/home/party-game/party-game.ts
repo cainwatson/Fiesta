@@ -55,6 +55,10 @@ export class PartyGamePage implements OnInit, OnDestroy {
     this.title = this.getTitle(this.game);
     this.state = this.game.state;
 
+    if (this.game.match_link) {
+      this.matchLink = this.game.match_link;
+    }
+
     this.userSub = this.store.select('user').subscribe((user) => {
       this.user = user;
       if (this.game.match_it_id && this.game.match_it_id == this.user.id) {
@@ -100,7 +104,6 @@ export class PartyGamePage implements OnInit, OnDestroy {
   }
 
   onGameUpdate(data) {
-    console.log(JSON.stringify(data));
     this.state = this.state === 'ended' ? 'ended' : data.state;
     if (data.name === 'match') {
       if (data.state === 'starting') {
@@ -118,9 +121,28 @@ export class PartyGamePage implements OnInit, OnDestroy {
           this.detectChanges();
         });
       }
-      if (data.hot_it) {
-        this.chosen = data.hot_it.user_id == this.user.id;
+
+      // try {
+      //   // console.log(this.user.id === data.hot_it_id);
+      //   // console.log(this.user.id, this.user.nickname, 'HOT IT USER ID', data.hot_id_id, 'HOT IT USER ID 1');
+      //   console.log(this.user.id, this.user.nickname, 'HOT IT USER ID', data.hot_it.user_id, 'HOT IT USER ID 2');
+      // } catch (e) { }
+
+      // console.log('\n')
+      // console.log('------------', this.user.nickname)
+      // console.log('HOT IT ID', data.hot_it_id);
+      // console.log('USER ID', this.user.id);
+      if (data.hot_it_id) {
+        if (data.hot_it_id == this.user.id) {
+          this.chosen = true;
+        } else {
+          this.chosen = false;
+        }
+        // this.chosen = data.hot_it_id == this.user.id;
+        // console.log('iS CHOSEN', this.chosen);
       }
+      // console.log('------------', this.user.nickname)
+      // console.log('\n')
     }
     this.detectChanges();
   }

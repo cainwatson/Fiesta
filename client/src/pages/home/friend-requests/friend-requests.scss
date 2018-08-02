@@ -7,4 +7,12 @@ page-friend-requests {
   .go-to-profile {
     font-size: 1.8rem !important;
   }
+
+  ion-list {
+    margin-top: 0 !important;
+    margin-bottom: 5px !important;
+  }
+  ion-list > div {
+    padding-bottom: 0 !important;
+  }
 }

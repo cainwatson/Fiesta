@@ -33,7 +33,7 @@ module.exports = (app) => {
     phone: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: false,
     },
     googleId: {
       type: DataTypes.STRING,

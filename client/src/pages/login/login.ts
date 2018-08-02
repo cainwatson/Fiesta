@@ -33,11 +33,15 @@ export class LoginPage {
   googleLogin() {
     this.loadingUIProvider.load(
       async () => {
-        const googleUser = await this.userProvider.googleSignin();
-        const user = await this.userProvider.findUser({ googleId: googleUser.googleId });
-        await (!user
-          ? this.navCtrl.push('SignupPage', { googleUser, authenticate: this.authenticate.bind(this) })
-          : this.authenticate(user, googleUser.accessToken));
+        try {
+          const googleUser = await this.userProvider.googleSignin();
+          const user = await this.userProvider.findUser({ googleId: googleUser.googleId });
+          await (!user
+            ? this.navCtrl.push('SignupPage', { googleUser, authenticate: this.authenticate.bind(this) })
+            : this.authenticate(user, googleUser.accessToken));
+        } catch (e){
+          console.log(JSON.stringify(e), 'OOPS');
+        }
       },
       'We couldn\'t log you in with Google. Try Again.',
       {

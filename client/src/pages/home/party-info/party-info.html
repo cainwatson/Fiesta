@@ -25,7 +25,7 @@
       </ion-item>
     </ion-list>
   </div>
-  <div *ngIf="party.media.length !== 0" class="story" margin-bottom>
+  <div *ngIf="party.media && party.media.length !== 0" class="story" margin-bottom>
     <h2>Story</h2>
     <div class="d-flex">
       <div *ngFor="let media of party.media | slice:0:3; index as i" class="media">
