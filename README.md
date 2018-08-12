@@ -38,15 +38,16 @@ This project uses the following technologies
 ### Installing Dependencies
 
 ```sh
-# in the server directory
-npm install
-npm start
+# make sure you have ionic and cordova installed
+npm install --global ionic cordova
 
 # in the client directory
 npm install
-npm install --global ionic cordova
-
 ionic serve --lab -lc
+
+# in the server directory
+npm install
+npm start
 ```
 
 ### Roadmap
