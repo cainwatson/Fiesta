@@ -27,7 +27,7 @@ Check out our wireframe [here](https://marvelapp.com/3id7f3c)
 This project uses the following technologies
 
 - Node 10.0.0
-- MySql 14.14
+- MySql 8.0.11
 - Ionic 3
 - FeathersJS 3.1.7
 - Cloudinary
