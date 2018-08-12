@@ -1,13 +1,8 @@
 {
   "name": "fiesta-server",
-  "description": "",
+  "private": true,
   "version": "0.0.1",
-  "homepage": "",
   "main": "src",
-  "keywords": [
-    "feathers"
-  ],
-  "author": "Cainiac Combo",
   "directories": {
     "lib": "src",
     "test": "test/"
